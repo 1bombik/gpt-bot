@@ -19,6 +19,14 @@ async def greeting(message: types.Message):
                          f"Напиши мне что-то :)")
 
 
+@dp.message_handler(commands='getnumber')
+async def greeting(message: types.Message):
+    print('Looking for the number')
+    time.sleep(randrange(2))
+    await message.answer(f"{randrange(0, 9)}")
+    print('Number found')
+
+
 thinking_msg = [
     "Дай-ка подумать...",
     "Ищу ответ...",
@@ -42,8 +50,10 @@ async def gpt_answer(message: types.Message):
     )
 
     await message.answer(thinking_msg[randrange(0, len(thinking_msg) - 1)])
-    time.sleep(randrange(3, 7))
+    print('Searching for an answer')
+    time.sleep(randrange(5, 10))
     await message.answer(completion.choices[0].text)
+    print('Answer found')
 
 
 if __name__ == "__main__":
